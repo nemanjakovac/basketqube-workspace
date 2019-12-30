@@ -1,0 +1,9 @@
+package com.logiqube.basketqube.dataimport.service;
+
+import com.logiqube.basketqube.model.Player;
+
+public interface PlayerService {
+	
+	Player savePlayer(Player player);
+
+}

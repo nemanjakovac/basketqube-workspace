@@ -1,0 +1,42 @@
+package com.logiqube.basketqube.dataimport.players;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LoadPlayers {
+
+	public void hello() {
+		System.out.println("Hello load players");
+	}
+	
+	public void load() throws IOException {
+		Document doc = Jsoup.connect("https://www.euroleague.net/competition/players?letter=A").get();
+		String title = doc.title();
+		System.out.println("title is: " + title);
+		
+		// select div with info
+//		Element e = doc.select("div.person-list.player-list > div.items-list").first();
+		
+//		Elements links = e.select("div.item");
+		Elements playerLinks = doc.select("div.person-list.player-list > div.items-list > div.item > a:nth-child(1)");
+		
+		playerLinks.forEach( link -> {
+			String a = link.html();
+			System.out.println(a);
+		});
+		
+//		for (Element link : playerLinks) {
+//			String a = link.
+//		}
+		
+		System.out.println("Player list");
+//		System.out.println(e.data());
+	}
+	
+}

@@ -1,0 +1,24 @@
+package com.logiqube.basketqube;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.logiqube.basketqube.model.Player;
+
+@SpringBootApplication
+public class BasketqubeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(BasketqubeApplication.class, args);
+		System.out.println("App started...");
+		savePlayer();
+	}
+	
+	public static void savePlayer() {
+		Player player = new Player();
+		player.setFirstName("Nemanja");
+		player.setLastName("Kovac");
+		player.setNationality("Serbian");
+	}
+
+}

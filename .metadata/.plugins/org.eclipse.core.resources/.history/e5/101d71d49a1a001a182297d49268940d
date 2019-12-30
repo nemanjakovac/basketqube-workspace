@@ -1,0 +1,26 @@
+package com.logiqube.basketqube.model;
+
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@Document(collection = "player")
+@EqualsAndHashCode(callSuper = true)
+public final class Player extends Person {
+
+	@Field(value = "height")
+	private Long height;
+
+	@Field(value = "position")
+	private String position;
+
+	public Player(String firstName, String lastName, String nationality, Long height, String position) {
+		super(firstName, lastName, nationality);
+		this.height = height;
+		this.position = position;
+	}
+
+}

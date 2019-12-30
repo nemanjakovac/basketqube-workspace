@@ -1,0 +1,55 @@
+package com.logiqube.basketqube.util;
+
+import java.time.LocalDate;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+
+import com.logiqube.basketqube.dataimport.repository.PlayerRepository;
+import com.logiqube.basketqube.dataimport.service.PlayerService;
+import com.logiqube.basketqube.dto.model.PlayerDto;
+import com.logiqube.basketqube.model.Player;
+
+@Component
+public class DataLoader implements ApplicationRunner {
+
+	private static final Logger logger = LoggerFactory.getLogger(DataLoader.class);
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
+		cleanExistingData();
+		
+		savePlayer();
+		updatePlayer();
+		logger.info("Player saved");
+	}
+
+	@Autowired
+	PlayerService service;
+
+	@Autowired
+	PlayerRepository repository;
+
+	public void savePlayer() {
+		Player player = new Player("Nemanja", "Kovac", LocalDate.of(1989, 3, 17), "Serbian", Long.valueOf(183),
+				"Guard");
+		repository.save(player);
+	}
+	
+	public void updatePlayer() {
+		PlayerDto playerDto = new PlayerDto();
+		playerDto.setFirstName("Ljubomir");
+		playerDto.setHeight(Long.valueOf(183));
+		playerDto.setNotes("This is updated player!");
+		service.updatePlayer(playerDto);
+	}
+
+	private void cleanExistingData() {
+		repository.deleteAll();
+	}
+
+}

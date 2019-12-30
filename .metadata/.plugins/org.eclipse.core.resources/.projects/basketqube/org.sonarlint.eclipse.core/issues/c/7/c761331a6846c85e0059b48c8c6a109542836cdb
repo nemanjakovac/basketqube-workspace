@@ -1,0 +1,8 @@
+
+p
+squid:S106"9Replace this use of System.out or System.err by a logger.(©õ‹Øøÿÿÿÿ8Ã·ÖÏî-H#RMAJORZ
+CODE_SMELL
+lsquid:S1854":Remove this useless assignment to local variable "player".( öøX8ÁºÎ×î-H/RMAJORZ
+CODE_SMELL
+]squid:S1481"+Remove this unused "player" local variable.( öøX8ÁºÎ×î-H0RMINORZ
+CODE_SMELL

@@ -1,0 +1,5 @@
+package com.logiqube.basketqube.model;
+
+public class Person {
+
+}

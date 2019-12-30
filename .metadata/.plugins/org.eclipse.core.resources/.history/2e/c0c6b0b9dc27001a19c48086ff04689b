@@ -1,0 +1,19 @@
+package com.logiqube.basketqube.dataimport.service;
+
+import com.logiqube.basketqube.dto.model.TeamDto;
+
+public class TeamServiceImpl implements TeamService {
+
+	@Override
+	public TeamDto saveTeam(TeamDto teamDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TeamDto updateTeam(TeamDto teamDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

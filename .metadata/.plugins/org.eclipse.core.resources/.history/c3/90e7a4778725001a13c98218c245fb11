@@ -1,0 +1,53 @@
+package com.logiqube.basketqube.dataimport.players;
+
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
+
+@Component
+public class LoadPlayers {
+	
+	private String EL_BASE_URL = "https://www.euroleague.net";
+
+	public void hello() {
+		System.out.println("Hello load players");
+	}
+	
+	public void load() throws IOException {
+		Document doc = Jsoup.connect("https://www.euroleague.net/competition/players?letter=A").get();
+		String title = doc.title();
+		System.out.println("title is: " + title);
+		
+		// select div with info
+		Elements playerLinks = doc.select("div.person-list.player-list > div.items-list > div.item > a:nth-child(1)");
+		
+		playerLinks.forEach( link -> {
+			String text = link.html();
+			try {
+				loadPlayerFromUrl(EL_BASE_URL + link.attr("href"), text.substring(text.indexOf(',')+1).trim(), text.substring(0, text.indexOf(',')).trim());
+			} catch (IOException e) {
+				//TODO handle exception
+			}
+		});
+		
+	}
+
+	private void loadPlayerFromUrl(String url, String firstName, String lastName) throws IOException {
+		System.out.println(firstName + " " + lastName);
+		System.out.println(url);
+		Document doc = Jsoup.connect(url).get();
+		Element playerData = doc.selectFirst("div.player-data");
+//		Element playerPosition = playerData.selectFirst("div.summary-first > span:nth-child(2) > span:nth-child(2)");
+		String position = playerData.selectFirst("div.summary-first > span:nth-child(2) > span:nth-child(2)").html();
+//		Elements playerInfo = playerData.select("div.summary-second > span:nth-child(1)");
+		String height = playerData.selectFirst("div.summary-second > span:nth-child(1)").html();
+		String dateOfBirth = playerData.selectFirst("div.summary-second > span:nth-child(2)").html();
+		String nationality = playerData.selectFirst("div.summary-second > span:nth-child(3)").html();
+		
+	}
+	
+}

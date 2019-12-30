@@ -1,0 +1,13 @@
+package com.logiqube.basketqube.dataimport.service;
+
+import com.logiqube.basketqube.model.Player;
+
+public class PlayerServiceImpl implements PlayerService {
+
+	@Override
+	public Player savePlayer(Player player) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

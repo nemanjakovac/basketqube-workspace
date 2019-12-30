@@ -1,0 +1,30 @@
+package com.logiqube.basketqube.dto.model;
+
+import java.time.LocalDate;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)  // https://projectlombok.org/features/experimental/Accessors
+public class PlayerDto {
+	
+//	private String personId;
+	
+	private String firstName;
+	
+	private String lastName;
+	
+//	@JsonSerialize(using = LocalDateSerializer.class)
+//	@JsonDeserialize(using = LocalDateDeserializer.class)
+	private LocalDate birthDate;
+	
+	private String nationality;
+	
+	private Long height;
+
+	private String position;
+	
+	private String notes;
+
+}

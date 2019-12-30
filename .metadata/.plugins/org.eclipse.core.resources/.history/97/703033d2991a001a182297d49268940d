@@ -1,0 +1,5 @@
+package com.logiqube.basketqube.model;
+
+public final class Coach extends Person {
+
+}

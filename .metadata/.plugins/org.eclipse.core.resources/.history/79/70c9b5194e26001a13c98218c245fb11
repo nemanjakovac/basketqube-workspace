@@ -1,0 +1,22 @@
+package com.logiqube.basketqube.model;
+
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+
+@Data
+public class TeamLeagueData {
+	
+	@Field(value = "league_code")
+	private String leagueCode;
+	
+	@Field(value = "league_name")
+	private String leagueName;
+	
+	@Field(value = "team_code")
+	private String teamCode;
+	
+	@Field(value = "team_name")
+	private String teamName;
+
+}

@@ -1,0 +1,32 @@
+package com.logiqube.basketqube.model;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+//@SuppressWarnings("serial")
+@Data
+@Document(collection = "player")
+@EqualsAndHashCode(callSuper = true)
+public final class Player extends Person /* implements Serializable*/ {
+
+	@Id
+	@Field(value = "height")
+	private Long height;
+
+	@Field(value = "position")
+	private String position;
+
+	public Player(String firstName, String lastName, LocalDate birthDate, String nationality, Long height, String position) {
+		super(firstName, lastName, birthDate, nationality);
+		this.height = height;
+		this.position = position;
+	}
+
+}
