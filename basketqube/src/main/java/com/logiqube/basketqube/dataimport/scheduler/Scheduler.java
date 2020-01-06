@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.logiqube.basketqube.dataimport.players.LoadPlayers;
+import com.logiqube.basketqube.dataimport.teams.LoadTeams;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,6 +48,18 @@ public class Scheduler {
 	public void callLoadPlayers() {
 		try {
 			loadPlayers.load();
+		} catch (IOException e) {
+			// TODO handle exception
+		}
+	}
+	
+	@Autowired
+	LoadTeams loadTeams;
+
+	@Scheduled(cron = "${load.teams.schedule}")
+	public void callLoadTeams() {
+		try {
+			loadTeams.load();
 		} catch (IOException e) {
 			// TODO handle exception
 		}

@@ -1,4 +1,0 @@
-#https://www.freeformatter.com/cron-expression-generator-quartz.html
-
-#start chrone job to load players
-load.players.schedule=* 0/10 * ? * *

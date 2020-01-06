@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=basketqube/src\/main\/java&lt;com.logiqube.basketqube.model{Person.java[Person" modifiers="1025" timestamp="1575897201761"/>
     <typeInfo handle="=basketqube/C:\/Users\/nkovac\/.m2\/repository\/org\/springframework\/data\/spring-data-mongodb\/2.2.3.RELEASE\/spring-data-mongodb-2.2.3.RELEASE.jar&lt;org.springframework.data.mongodb.repository(MongoRepository.class[MongoRepository" modifiers="1537" timestamp="1575883163641"/>
-    <typeInfo handle="=basketqube/src\/main\/java&lt;com.logiqube.basketqube.dataimport.service{PlayerService.java[PlayerService" modifiers="513" timestamp="1575899420415"/>
+    <typeInfo handle="=basketqube/src\/main\/java&lt;com.logiqube.basketqube.dataimport.service{PlayerService.java[PlayerService" modifiers="513" timestamp="1577117218385"/>
+    <typeInfo handle="=basketqube/src\/main\/java&lt;com.logiqube.basketqube.model{Person.java[Person" modifiers="1" timestamp="1576573082931"/>
 </typeInfoHistroy>

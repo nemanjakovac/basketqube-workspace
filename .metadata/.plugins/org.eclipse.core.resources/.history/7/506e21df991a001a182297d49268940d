@@ -1,9 +1,0 @@
-package com.logiqube.basketqube.model;
-
-public final class Coach extends Person {
-
-	public Coach(String firstName, String lastName, String nationality) {
-		super(firstName, lastName, nationality);
-	}
-
-}

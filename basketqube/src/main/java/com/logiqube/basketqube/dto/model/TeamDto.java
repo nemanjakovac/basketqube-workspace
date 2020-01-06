@@ -22,4 +22,10 @@ public class TeamDto {
 		this.teamName = teamName;
 	}
 
+	public TeamDto(String teamName) {
+		this.teamName = teamName;
+	}
+	
+	
+
 }

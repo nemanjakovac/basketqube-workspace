@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.logiqube.basketqube.dataimport.repository.PlayerRepository;
 import com.logiqube.basketqube.dataimport.repository.TeamRepository;
 import com.logiqube.basketqube.dataimport.service.PlayerService;
+import com.logiqube.basketqube.dataimport.service.TeamService;
 import com.logiqube.basketqube.dto.model.PlayerDto;
 import com.logiqube.basketqube.dto.model.TeamDto;
 import com.logiqube.basketqube.model.Team;
@@ -33,7 +34,7 @@ public class DataLoader implements ApplicationRunner {
 	PlayerService service;
 
 	@Autowired
-	PlayerRepository repository;
+	PlayerRepository playerRepository;
 
 	public void savePlayer() {
 		PlayerDto playerDto = new PlayerDto("Nemanja", "Kovac", LocalDate.of(1989, 3, 17), "Serbian",
@@ -52,9 +53,14 @@ public class DataLoader implements ApplicationRunner {
 	}
 
 	private void cleanExistingData() {
-		repository.deleteAll();
-		log.info("Player table deleted");
+//		playerRepository.deleteAll();
+//		log.info("Player table deleted");
+		teamRepository.deleteAll();
+		log.info("Team table deleted");
 	}
+	
+	@Autowired
+	TeamService teamService;
 	
 	@Autowired
 	TeamRepository teamRepository;
@@ -62,12 +68,17 @@ public class DataLoader implements ApplicationRunner {
 	public void saveTeam() {
 //		TeamDto teamDto = new TeamDto("EEE", "customLeague", "TTT", "My team");
 		
-		Team team = new Team("Kovac KK");
-
-		TeamLeagueData data = new TeamLeagueData("EEE", "customLeague", "TTT", "My team");
-		team.addLeagueData(data);
-		teamRepository.save(team);
-		log.info("Team saved");
+//		Team team = new Team("Kovac KK");
+//
+//		TeamLeagueData data = new TeamLeagueData("EEE", "customLeague", "TTT", "My team");
+//		team.addLeagueData(data);
+//		teamRepository.save(team);
+		
+		TeamDto teamDto = new TeamDto("ZZZ", "Euroleague", "YYY", "Partizan");
+		
+		TeamDto savedTeam = teamService.saveTeam(teamDto);
+		
+		log.info("Team saved", savedTeam);
 	}
 	
 }

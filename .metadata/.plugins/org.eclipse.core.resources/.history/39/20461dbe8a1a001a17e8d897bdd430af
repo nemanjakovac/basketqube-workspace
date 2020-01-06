@@ -1,9 +1,0 @@
-package com.logiqube.basketqube.dataimport.repository;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import com.logiqube.basketqube.model.Player;
-
-public interface PlayerRepository extends MongoRepository<Player, String> {
-
-}
