@@ -13,8 +13,6 @@ import com.logiqube.basketqube.dataimport.service.PlayerService;
 import com.logiqube.basketqube.dataimport.service.TeamService;
 import com.logiqube.basketqube.dto.model.PlayerDto;
 import com.logiqube.basketqube.dto.model.TeamDto;
-import com.logiqube.basketqube.model.Team;
-import com.logiqube.basketqube.model.TeamLeagueData;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +25,7 @@ public class DataLoader implements ApplicationRunner {
 //		cleanExistingData();
 //		savePlayer();
 //		updatePlayer();
-		saveTeam();
+//		saveTeam();
 	}
 
 	@Autowired
@@ -66,14 +64,7 @@ public class DataLoader implements ApplicationRunner {
 	TeamRepository teamRepository;
 	
 	public void saveTeam() {
-//		TeamDto teamDto = new TeamDto("EEE", "customLeague", "TTT", "My team");
-		
-//		Team team = new Team("Kovac KK");
-//
-//		TeamLeagueData data = new TeamLeagueData("EEE", "customLeague", "TTT", "My team");
-//		team.addLeagueData(data);
-//		teamRepository.save(team);
-		
+
 		TeamDto teamDto = new TeamDto("ZZZ", "Euroleague", "YYY", "Partizan");
 		
 		TeamDto savedTeam = teamService.saveTeam(teamDto);

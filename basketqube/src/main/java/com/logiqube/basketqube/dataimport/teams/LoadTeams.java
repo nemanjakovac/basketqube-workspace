@@ -1,7 +1,6 @@
 package com.logiqube.basketqube.dataimport.teams;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -31,46 +30,39 @@ public class LoadTeams {
 		// load teams page
 		Document doc = Jsoup.connect("https://www.euroleague.net/competition/teams").get();
 
-		// select div with url to player details
+		// select div with url to team details
 		Elements teamList = doc.select("div.teams > div.item");
 		
 		teamList.forEach(team -> {
-			loadTeam(team);
+			try {
+				loadTeam(team);
+			} catch (Exception e) {
+				// TODO: handle exception
+				String b = "error";
+			}
+			
+			String a = "team loaded";
 		}
 		);
-
-//		playerLinks.forEach(link -> {
-//			String text = link.html();
-//			try {
-//				loadPlayerFromUrl(EL_BASE_URL + link.attr("href"), text.substring(text.indexOf(',') + 1).trim(),
-//						text.substring(0, text.indexOf(',')).trim());
-//			} catch (IOException e) {
-//				// TODO handle exception
-//			}
-//
-//			// put to sleep for 5 seconds after each player insert
-//			try {
-////					Thread.sleep(5000);
-//				TimeUnit.SECONDS.sleep(5);
-//			} catch (InterruptedException e) {
-//				// TODO handle exception
-//				log.debug("Sleeping for 5s");
-//			}
-//		});
 
 	}
 
 	private void loadTeam(Element teamData) {
 		String leagueCode = "EL";
 		String leagueName = "Euroleague";
-		Element code = teamData.select("div.RoasterName > a").first();
-		String teamCode = teamData.select("div.RoasterName > a").attr("href");
 		
-		String a = "";
+		String code = teamData.select("div.RoasterName > a").attr("href");
 		
-//		TeamDto teamDto = new TeamDto(leagueCode, leagueName, teamCode, teamName);
-		// TODO Auto-generated method stub
+		String teamCode = code.substring(code.indexOf("clubcode")+9, code.indexOf("clubcode")+12);
+		String teamName = teamData.select("div.RoasterName > a").first().text();
 		
+		TeamDto teamDto = new TeamDto(leagueCode, leagueName, teamCode, teamName);
+		
+		teamDto = teamService.saveTeam(teamDto);
+		
+		if (log.isDebugEnabled())
+			log.debug(String.format("Team %s saved!", teamDto));
+
 	}
 
 }
