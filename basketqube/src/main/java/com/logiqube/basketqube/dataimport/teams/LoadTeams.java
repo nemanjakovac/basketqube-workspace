@@ -32,34 +32,30 @@ public class LoadTeams {
 
 		// select div with url to team details
 		Elements teamList = doc.select("div.teams > div.item");
-		
+
 		teamList.forEach(team -> {
 			try {
 				loadTeam(team);
 			} catch (Exception e) {
 				// TODO: handle exception
-				String b = "error";
 			}
-			
-			String a = "team loaded";
-		}
-		);
+		});
 
 	}
 
 	private void loadTeam(Element teamData) {
 		String leagueCode = "EL";
 		String leagueName = "Euroleague";
-		
+
 		String code = teamData.select("div.RoasterName > a").attr("href");
-		
-		String teamCode = code.substring(code.indexOf("clubcode")+9, code.indexOf("clubcode")+12);
+
+		String teamCode = code.substring(code.indexOf("clubcode") + 9, code.indexOf("clubcode") + 12);
 		String teamName = teamData.select("div.RoasterName > a").first().text();
-		
+
 		TeamDto teamDto = new TeamDto(leagueCode, leagueName, teamCode, teamName);
-		
+
 		teamDto = teamService.saveTeam(teamDto);
-		
+
 		if (log.isDebugEnabled())
 			log.debug(String.format("Team %s saved!", teamDto));
 
