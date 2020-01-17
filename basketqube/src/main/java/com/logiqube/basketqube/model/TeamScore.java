@@ -37,4 +37,11 @@ public class TeamScore implements Serializable {
 
 	@Field(value = "total_ot")
 	private int totalOt;
+	
+	public void setTotalsByQuarter(int q1Total, int q2Total, int q3Total, int q4Total) {
+		this.total1q = q1Total;
+		this.total2q = q2Total;
+		this.total3q = q3Total;
+		this.total4q = q4Total;
+	}
 }

@@ -35,16 +35,25 @@ public class Match implements Serializable {
 
 	@Field(value = "round")
 	private String round;
-	
+
 	@Field(value = "match_time")
-	private int matchTime;	
-	
+	private int matchTime;
+
 	@Field(value = "home_team")
 	private TeamScore homeTeam;
-	
+
 	@Field(value = "away_team")
 	private TeamScore awayTeam;
 
 	@Field(value = "box_score")
 	private BoxScore boxScore;
+
+	public Match(String leagueCode, String leagueName, String seasonCode, LocalDateTime date, String round) {
+		this.leagueCode = leagueCode;
+		this.leagueName = leagueName;
+		this.seasonCode = seasonCode;
+		this.date = date;
+		this.round = round;
+	}
+
 }

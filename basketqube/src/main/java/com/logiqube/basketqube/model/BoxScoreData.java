@@ -17,6 +17,10 @@ public class BoxScoreData implements Serializable {
 	@Field(value = "player_name")
 	private String playerName;
 	
+	// Y if true
+	@Field(value = "start_five")
+	private String startFive;
+	
 	@Field(value = "team_id")
 	private String teamId;
 	
@@ -27,7 +31,7 @@ public class BoxScoreData implements Serializable {
 	private String minutesPlayed;
 	
 	@Field(value = "points")
-	private String points;
+	private int points;
 	
 	@Field(value = "fg_2pt_att")
 	private int fieldGoal2ptAtt;

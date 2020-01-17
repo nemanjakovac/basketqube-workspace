@@ -85,13 +85,7 @@ public class DataLoader implements ApplicationRunner {
 	MatchRepository matchRepository;
 	
 	public void saveMatch() {
-		Match match = new Match();
-		
-		match.setLeagueCode("EL");
-		match.setLeagueName("Euroleague");
-		match.setRound("1");
-		match.setSeasonCode("2019");
-		match.setDate(LocalDateTime.now());
+		Match match = new Match("EL", "Euroleague", "2019", LocalDateTime.now(), "1");
 		match.setMatchTime(40);
 		
 		TeamScore homeTeamScore = new TeamScore();

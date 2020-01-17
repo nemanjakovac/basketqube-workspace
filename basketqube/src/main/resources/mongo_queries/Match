@@ -1,0 +1,38 @@
+1) Get all matches of team by LEAGUE_ID and TEAM_ID
+
+$match
+{
+  $and: [
+  {
+    $or: [
+      { "league_code" : "EL" },
+      { "league_code" : "ISR"}
+    ]
+  },
+    {
+    $or: [
+      { "home_team.team_id" : "TEL" },
+      { "away_team.team_id" : "TEL"}
+    ]
+  }
+  ]
+}
+
+1) Get all matches of team by LEAGUE_ID and PLAYER_ID
+
+{
+  $and: [
+  {
+    $or: [
+      { "league_code" : "EL" },
+      { "league_code" : "ISR"}
+    ]
+  },
+    {
+    $or: [
+      { "box_score.home_players.player_id" : "005160" },
+      { "box_score.away_players.player_id" : "005160"}
+    ]
+  }
+  ]
+}
