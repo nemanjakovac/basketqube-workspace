@@ -1,5 +1,0 @@
-package com.logiqube.basketqube.dataimport.service;
-
-public interface TeamService {
-
-}

@@ -1,9 +1,0 @@
-package com.logiqube.basketqube.dataimport.repository;
-
-import org.springframework.data.mongodb.repository.MongoRepository;
-
-import com.logiqube.basketqube.model.Team;
-
-public interface TeamRepository extends MongoRepository<Team, String> {
-
-}
