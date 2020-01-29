@@ -69,11 +69,7 @@ public class Scheduler {
 	
 	@Scheduled(cron = "${load.matches.schedule}")
 	public void callLoadMatches() {
-		try {
-			loadMatches.load();
-		} catch (IOException e) {
-			// TODO handle exception
-		}
+		loadMatches.load();
 	}
 	
 	
