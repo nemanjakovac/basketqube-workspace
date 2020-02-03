@@ -10,19 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class LoadMatches {
-
-//	private MatchLoader loader;
-
+	
 	public void hello() {
 		log.info("Hello load matches");
 	}
 
 	// use synchronized only one thread is active
 	public synchronized void load() {
-
 		MatchLoader loader = MatchLoader.getMatchLoader(League.EL);
-		loader.loadAllMatches();
-
+		loader.loadAllMatches(League.EL.toString());
 	}
 
 }

@@ -10,15 +10,19 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import com.logiqube.basketqube.dataimport.repository.LoaderInfoRepository;
 import com.logiqube.basketqube.dataimport.repository.MatchRepository;
 import com.logiqube.basketqube.dataimport.repository.PlayerRepository;
 import com.logiqube.basketqube.dataimport.repository.TeamRepository;
+import com.logiqube.basketqube.dataimport.service.LoaderInfoService;
 import com.logiqube.basketqube.dataimport.service.PlayerService;
 import com.logiqube.basketqube.dataimport.service.TeamService;
 import com.logiqube.basketqube.dto.model.PlayerDto;
 import com.logiqube.basketqube.dto.model.TeamDto;
+import com.logiqube.basketqube.enums.Enums.League;
 import com.logiqube.basketqube.model.BoxScore;
 import com.logiqube.basketqube.model.BoxScoreData;
+import com.logiqube.basketqube.model.LoaderInfo;
 import com.logiqube.basketqube.model.Match;
 import com.logiqube.basketqube.model.TeamScore;
 
@@ -35,6 +39,7 @@ public class DataLoader implements ApplicationRunner {
 //		updatePlayer();
 //		saveTeam();
 //		saveMatch();
+//		updateOrSaveLoaderInfo();
 	}
 
 	@Autowired
@@ -82,10 +87,34 @@ public class DataLoader implements ApplicationRunner {
 	}
 	
 	@Autowired
+	LoaderInfoRepository loaderInfoRepository;
+	
+	@Autowired
+	LoaderInfoService loaderInfoService;
+	
+	public void updateOrSaveLoaderInfo() {
+		LoaderInfo info = new LoaderInfo(League.EL.toString(), "19", LocalDateTime.now());
+		loaderInfoService.saveLoaderInfo(info);
+		
+//		LoaderInfo currentInfo = loaderInfoRepository.findByLeagueCode(info.getLeagueCode());
+//		if (currentInfo.)
+//		info = loaderInfoRepository.findByLeagueCode(info.getLeagueCode());
+//		info.setRound("19");
+//		info.setLastLoaded(LocalDateTime.now());
+//		
+//		loaderInfoRepository.save(info);
+	}
+	
+	public void saveLoaderInfo() {
+		LoaderInfo info = new LoaderInfo(League.EL.toString(), "18", LocalDateTime.now());
+		loaderInfoRepository.save(info);
+	}
+	
+	@Autowired
 	MatchRepository matchRepository;
 	
 	public void saveMatch() {
-		Match match = new Match("EL", "Euroleague", "2019", LocalDateTime.now(), "1");
+		Match match = new Match("EL", "Euroleague", "2019", LocalDateTime.now(), "1", "some url");
 		match.setMatchTime(40);
 		
 		TeamScore homeTeamScore = new TeamScore();

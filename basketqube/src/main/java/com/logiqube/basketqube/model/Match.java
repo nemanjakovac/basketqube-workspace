@@ -47,13 +47,17 @@ public class Match implements Serializable {
 
 	@Field(value = "box_score")
 	private BoxScore boxScore;
+	
+	@Field(value = "url")
+	private String url;
 
-	public Match(String leagueCode, String leagueName, String seasonCode, LocalDateTime date, String round) {
+	public Match(String leagueCode, String leagueName, String seasonCode, LocalDateTime date, String round, String url) {
 		this.leagueCode = leagueCode;
 		this.leagueName = leagueName;
 		this.seasonCode = seasonCode;
 		this.date = date;
 		this.round = round;
+		this.url = url;
 	}
 
 }

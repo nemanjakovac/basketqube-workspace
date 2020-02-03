@@ -15,11 +15,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import com.logiqube.basketqube.dataimport.service.LoaderInfoService;
 import com.logiqube.basketqube.dataimport.service.MatchService;
 import com.logiqube.basketqube.enums.Enums.Entity;
 import com.logiqube.basketqube.enums.Enums.Venue;
@@ -45,15 +45,13 @@ public class MatchLoaderEuroleague extends MatchLoader {
 	
 	
 	@Autowired
-	public MatchLoaderEuroleague(MatchService matchService) {
-		setMatchService(matchService);
-//		super.s = matchService;
-//		super(matchService);
+	public MatchLoaderEuroleague(MatchService matchService, LoaderInfoService loaderInfoService, Environment env) {
+		setMatchServices(matchService, loaderInfoService, env);
 	}
 
 	@Override
 	protected List<URL> getMatchUrls() {
-		List<URL> urls = new ArrayList<URL>();
+		List<URL> urls = new ArrayList<>();
 
 		Document doc = null;
 		try {
@@ -68,10 +66,12 @@ public class MatchLoaderEuroleague extends MatchLoader {
 		extractCurrentData(roundData);
 
 		// get minimum round from DB max (last) loaded, so we only load next rounds
-		for (int i = 18; i < Integer.valueOf(ROUND_MAX) - 1; i++) {
+		for (int i = Integer.valueOf(LAST_LOADED_ROUND) + 1; i < Integer.valueOf(ROUND_MAX); i++) {
 			ROUND_CURRENT = String.valueOf(i);
-			String roundPage = EL_BASE_URL.concat("/main/results").concat(ROUND_PARAMETER).concat(ROUND_CURRENT)
-					.concat(PHASE_PARAMETER).concat(PHASE_MAX).concat(SEASON_PARAMETER).concat(SEASON_MAX);
+			String roundPage = EL_BASE_URL.concat("/main/results")
+					.concat(ROUND_PARAMETER).concat(ROUND_CURRENT)
+					.concat(PHASE_PARAMETER).concat(PHASE_MAX)
+					.concat(SEASON_PARAMETER).concat(SEASON_MAX);
 
 			Document roundDoc = null;
 			try {
@@ -105,7 +105,7 @@ public class MatchLoaderEuroleague extends MatchLoader {
 		
 		Element gameInfo = doc.getElementById("sg-score");
 		
-		Element gameScore = gameInfo.getElementsByClass("game-score").first();
+//		Element gameScore = gameInfo.getElementsByClass("game-score").first();
 		Element gameDate = gameInfo.getElementsByClass("dates").first();
 
 		String leagueCode = LEAGUE_CODE;
@@ -113,14 +113,14 @@ public class MatchLoaderEuroleague extends MatchLoader {
 		
 //		MultiValueMap<String, String> parameters = UriComponentsBuilder.fromHttpUrl(url.toString()).build().getQueryParams();	
 //		String seasonCode = parameters.getFirst("seasoncode");
-		String seasonCode =		url.toString().substring(url.toString().indexOf("seasoncode") + 12,
+		String seasonCode =	url.toString().substring(url.toString().indexOf("seasoncode") + 12,
 				url.toString().indexOf("seasoncode") + 16);
 		String round = ROUND_CURRENT;
 		//matchUrl.substring(matchUrl.indexOf("gamecode") + 9, matchUrl.indexOf("seasoncode") - 1);
 
 		LocalDateTime matchDate = extractMatchDate(gameDate);
 
-		Match match = new Match(leagueCode, leagueName, seasonCode, matchDate, round);
+		Match match = new Match(leagueCode, leagueName, seasonCode, matchDate, round, url.toString());
 
 		return match;
 	}
