@@ -36,4 +36,9 @@ public class TeamServiceImpl implements TeamService {
 		return null;
 	}
 
+	@Override
+	public TeamDto findAllTeams() {
+		return (TeamDto) teamRepository.findAll();
+	}
+
 }

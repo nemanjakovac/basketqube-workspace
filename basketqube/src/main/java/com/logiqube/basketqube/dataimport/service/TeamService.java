@@ -6,5 +6,6 @@ public interface TeamService {
 	
 	TeamDto saveTeam(TeamDto teamDto);
 	TeamDto updateTeam(TeamDto teamDto);
+	TeamDto findAllTeams();
 
 }
