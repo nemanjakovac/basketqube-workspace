@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LoadPlayers {
 
 	private String EL_BASE_URL = "https://www.euroleague.net";
+	private String EL_PLAYERS_URL = "https://www.euroleague.net/competition/players?letter=";
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM, uuuu");
 
 	@Autowired
@@ -35,7 +36,7 @@ public class LoadPlayers {
 
 		// loop through all alphabet letters
 		for (char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
-			Document doc = Jsoup.connect("https://www.euroleague.net/competition/players?letter=" + alphabet).get();
+			Document doc = Jsoup.connect(EL_PLAYERS_URL + alphabet).get();
 
 			// select div with url to player details
 			Elements playerLinks = doc

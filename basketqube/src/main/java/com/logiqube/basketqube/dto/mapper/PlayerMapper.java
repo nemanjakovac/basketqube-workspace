@@ -16,7 +16,7 @@ public class PlayerMapper {
 
 	public PlayerDto convertToDto(Player player) {
 		PlayerDto playerDto = modelMapper.map(player, PlayerDto.class);
-		playerDto.setNote("test");
+//		playerDto.setNote("test");
 		return playerDto;
 		
 //		return new PlayerDto(player.getFirstName(), player.getLastName(), player.getBirthDate(),

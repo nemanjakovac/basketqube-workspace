@@ -10,20 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.logiqube.basketqube.dataimport.service.PlayerService;
-import com.logiqube.basketqube.dto.model.PlayerDto;
+import com.logiqube.basketqube.dataimport.service.MatchService;
+import com.logiqube.basketqube.dto.model.MatchDto;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/player")
-public class PlayerController {
-
+@RequestMapping(value = "/match")
+public class MatchController {
+	
 	@Autowired
-	PlayerService playerService;
-
+	MatchService matchService;
+	
 	@GetMapping(value = "")
-	public ResponseEntity<List<PlayerDto>> findAll() {
-		return new ResponseEntity<>(playerService.getAll(), HttpStatus.OK);
+	public ResponseEntity<List<MatchDto>> findAll() {
+		return new ResponseEntity<>(matchService.getAll(), HttpStatus.OK);
 	}
 
 }
