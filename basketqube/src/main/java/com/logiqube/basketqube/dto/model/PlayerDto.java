@@ -42,8 +42,8 @@ public class PlayerDto {
 		this.lastName = lastName;
 	}
 
-//	public PlayerDto() {
-//	}
+	public PlayerDto() {
+	}
 	
 	
 

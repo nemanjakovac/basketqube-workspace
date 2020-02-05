@@ -1,6 +1,8 @@
 package com.logiqube.basketqube.dataimport.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +20,16 @@ public class PlayerServiceImpl implements PlayerService {
 	
 	@Autowired
 	private PlayerRepository playerRepository;
+	
+	@Autowired
+	private PlayerMapper playerMapper;
 
 	@Override
 	public PlayerDto savePlayer(PlayerDto playerDto) {
 		Player player = playerRepository.findByFirstNameAndLastName(playerDto.getFirstName(), playerDto.getLastName());
 		if(player == null) {
-			player = PlayerMapper.toPlayerEntity(playerDto);
-			return PlayerMapper.toPlayerDto(playerRepository.save(player));
+			player = playerMapper.convertToEntity(playerDto);
+			return playerMapper.convertToDto(playerRepository.save(player));
 		}
 		
 //		throw new Exception();
@@ -39,7 +44,7 @@ public class PlayerServiceImpl implements PlayerService {
 			Player playerModel = player.get();
 			playerModel.setNationality(playerDto.getNationality());
 			playerModel.setNote(playerDto.getNote());
-			return PlayerMapper.toPlayerDto(playerRepository.save(playerModel));
+			return playerMapper.convertToDto(playerRepository.save(playerModel));
 		}
 //		throw new Exception();
 		//TODO handle exception
@@ -52,10 +57,15 @@ public class PlayerServiceImpl implements PlayerService {
 		Optional<Player> player = Optional.ofNullable(playerRepository.findByFirstNameAndLastName(firstName, lastName));
 		if(player.isPresent()) {
 			Player playerModel = player.get();
-			return PlayerMapper.toPlayerDto(playerModel);
+			return playerMapper.convertToDto(playerModel);
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<PlayerDto> getAll() {
+		return playerRepository.findAll().stream().map(playerMapper::convertToDto).collect(Collectors.toList());
 	}
 	
 	

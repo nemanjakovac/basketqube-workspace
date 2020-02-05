@@ -25,6 +25,11 @@ public class TeamDto {
 	public TeamDto(String teamName) {
 		this.teamName = teamName;
 	}
+
+	public TeamDto() {
+	}
+	
+	
 	
 	
 

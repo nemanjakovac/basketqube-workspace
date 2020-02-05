@@ -1,5 +1,7 @@
 package com.logiqube.basketqube.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +21,17 @@ public class TeamController {
 	@Autowired
 	TeamService teamService;
 	
+//	@GetMapping(value = "")
+//	public ResponseEntity<List<TeamDto>> findAll(){
+//		return new ResponseEntity<>(teamService.getAll(), HttpStatus.OK);
+//	}
+	
 	@GetMapping(value = "")
-	public ResponseEntity<TeamDto> findAll(){
-		return new ResponseEntity<TeamDto>(teamService.findAllTeams(), HttpStatus.OK);
+	public ResponseEntity<List<TeamDto>> findAll(){
+	//	List<Team> teams = teamService.getAllTeams();
+	//	return teams.stream().map(mapper)(this:convertToDto).col
+		
+		return new ResponseEntity<>(teamService.getAll(), HttpStatus.OK);
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.logiqube.basketqube.dataimport.service;
 
+import java.util.List;
+
 import com.logiqube.basketqube.dto.model.PlayerDto;
 
 public interface PlayerService {
@@ -8,5 +10,7 @@ public interface PlayerService {
 	PlayerDto updatePlayer(PlayerDto playerDto);
 	
 	PlayerDto getByFirstNameAndLastName(String firstName, String lastName);
+	
+	List<PlayerDto> getAll();
 
 }
