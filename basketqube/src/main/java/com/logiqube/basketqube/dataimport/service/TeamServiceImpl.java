@@ -1,6 +1,7 @@
 package com.logiqube.basketqube.dataimport.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,9 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamDto saveTeam(TeamDto teamDto) {
-		Team team = teamRepository.findByLeagueCodeAndTeamCode(teamDto.getLeagueCode(), teamDto.getTeamCode());
-		if (team == null) {
-			team = teamMapper.convertToEntity(teamDto);
-			return teamMapper.convertToDto(teamRepository.save(team));
+		Optional<Team> team = teamRepository.findByLeagueCodeAndTeamCode(teamDto.getLeagueCode(), teamDto.getTeamCode());
+		if (!team.isPresent()) {
+			return teamMapper.convertToDto(teamRepository.save(teamMapper.convertToEntity(teamDto)));
 		} else {
 			if (log.isDebugEnabled())
 				log.debug("Team already exists");
@@ -45,6 +45,15 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<TeamDto> getAll() {
 		return teamRepository.findAll().stream().map(teamMapper::convertToDto).collect(Collectors.toList());
+	}
+
+	@Override
+	public TeamDto findById(String id) {
+		Optional<Team> team = teamRepository.findByTeamId(Long.valueOf(id));
+		if(team.isPresent())
+			return teamMapper.convertToDto(team.get());
+		//TODO handle object not present
+		return null;
 	}
 
 }

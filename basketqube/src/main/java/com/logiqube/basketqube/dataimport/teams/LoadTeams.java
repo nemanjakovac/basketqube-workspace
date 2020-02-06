@@ -38,6 +38,7 @@ public class LoadTeams {
 				loadTeam(team);
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println("ERROR: " + e.toString());
 			}
 		});
 
@@ -51,8 +52,11 @@ public class LoadTeams {
 
 		String teamCode = code.substring(code.indexOf("clubcode") + 9, code.indexOf("clubcode") + 12);
 		String teamName = teamData.select("div.RoasterName > a").first().text();
+		
+		String imageUrl = teamData.select("div.RoasterImage > a > img").attr("src");
 
 		TeamDto teamDto = new TeamDto(leagueCode, leagueName, teamCode, teamName);
+		teamDto.setImgUrl(imageUrl);
 
 		teamDto = teamService.saveTeam(teamDto);
 

@@ -24,8 +24,10 @@ public class PlayerMapper {
 	}
 
 	public Player convertToEntity(PlayerDto playerDto) {
-		return new Player(playerDto.getFirstName(), playerDto.getLastName(), playerDto.getBirthDate(),
-				playerDto.getNationality(), playerDto.getHeight(), playerDto.getPosition());
+		Player player = modelMapper.map(playerDto, Player.class);
+		return player;
+//		return new Player(playerDto.getFirstName(), playerDto.getLastName(), playerDto.getBirthDate(),
+//				playerDto.getNationality(), playerDto.getHeight(), playerDto.getPosition());
 	}
 
 //	private PlayerMapper() {

@@ -12,5 +12,6 @@ public interface PlayerService {
 	PlayerDto getByFirstNameAndLastName(String firstName, String lastName);
 	
 	List<PlayerDto> getAll();
+	PlayerDto findById(String id);
 
 }

@@ -9,5 +9,6 @@ public interface TeamService {
 	TeamDto saveTeam(TeamDto teamDto);
 	TeamDto updateTeam(TeamDto teamDto);
 	List<TeamDto> getAll();
+	TeamDto findById(String id);
 
 }

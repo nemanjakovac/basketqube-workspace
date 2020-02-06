@@ -2,13 +2,10 @@ package com.logiqube.basketqube.dataimport.scheduler;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.logiqube.basketqube.dataimport.matches.LoadMatches;
@@ -23,25 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Scheduler {
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-//	@Scheduled(cron = "${load.players.schedule}")
-//	public void reportCurrentTime() {
-//		if (log.isInfoEnabled())
-//			log.info("Current time = {}", dateFormat.format(new Date()));
-//		
-//		try {
-//			TimeUnit.SECONDS.sleep(5);
-//		} catch (InterruptedException e) {
-//			
-//		}
-//		
-//		if (log.isInfoEnabled())
-//			log.info("Woke up after sleep");
-//	}
-
 	@Autowired
 	LoadPlayers loadPlayers;
+	
+	@Autowired
+	LoadTeams loadTeams;
+	
+	@Autowired
+	LoadMatches loadMatches;
 
 //	@Scheduled(cron = "${load.players.schedule}")
 	public void callLoadPlayers() {
@@ -52,9 +38,6 @@ public class Scheduler {
 		}
 	}
 	
-	@Autowired
-	LoadTeams loadTeams;
-
 //	@Scheduled(cron = "${load.teams.schedule}")
 	public void callLoadTeams() {
 		try {
@@ -64,13 +47,9 @@ public class Scheduler {
 		}
 	}
 	
-	@Autowired
-	LoadMatches loadMatches;
-	
-	@Scheduled(cron = "${load.matches.schedule}")
+//	@Scheduled(cron = "${load.matches.schedule}")
 	public void callLoadMatches() {
 		loadMatches.load();
 	}
-	
 	
 }

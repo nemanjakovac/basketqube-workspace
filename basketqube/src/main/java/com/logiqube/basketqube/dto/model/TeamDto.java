@@ -7,13 +7,12 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class TeamDto {
 	
+	private long teamId;
 	private String leagueCode;
-	
 	private String leagueName;
-	
 	private String teamCode;
-	
 	private String teamName;
+	private String imgUrl;
 
 	public TeamDto(String leagueCode, String leagueName, String teamCode, String teamName) {
 		this.leagueCode = leagueCode;

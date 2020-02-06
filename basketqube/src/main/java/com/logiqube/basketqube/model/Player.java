@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -20,10 +21,13 @@ import lombok.Data;
 public final class Player implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Transient
+	public static final String SEQUENCE_NAME = "player_sequence";
 
 	@Id
 //	@Field(value = "player_id") - must not give custom name to id field
-	private String playerId;
+	private long playerId;
 	
 	@Field(value = "first_name")
 	private String firstName;
@@ -47,6 +51,9 @@ public final class Player implements Serializable {
 	
 	@Field(value = "note")
 	private String note;
+	
+	@Field(value = "img_url")
+	private String imgUrl;
 
 	public Player(String firstName, String lastName, LocalDate birthDate, String nationality, double height,
 			String position) {
@@ -65,7 +72,8 @@ public final class Player implements Serializable {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	
-	
+
+	public Player() {
+	}
 
 }

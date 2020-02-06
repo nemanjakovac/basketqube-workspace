@@ -57,7 +57,6 @@ public class LoadPlayers {
 					TimeUnit.SECONDS.sleep(5);
 				} catch (InterruptedException e) {
 					// TODO handle exception
-					log.debug("Sleeping for 5s");
 				}
 			});
 
@@ -73,14 +72,15 @@ public class LoadPlayers {
 
 		Document doc = Jsoup.connect(url).get();
 		Element playerData = doc.selectFirst("div.player-data");
+		String imageUrl = doc.selectFirst("div.player-img > img").attr("src");
 
 		PlayerDto player = new PlayerDto(firstName, lastName, extractDateOfBirth(playerData),
 				extractNationality(playerData), extractHeight(playerData), extractPosition(playerData));
-
+		
+		player.setImgUrl(imageUrl);
 		player = playerService.savePlayer(player);
 		if (log.isDebugEnabled())
 			log.debug(String.format("Player %s saved!", player));
-//		logger.info("sdsdsd");
 	}
 
 	private LocalDate extractDateOfBirth(Element playerData) {
