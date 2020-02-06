@@ -1,11 +1,11 @@
 package com.logiqube.basketqube.dataimport.scheduler;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.logiqube.basketqube.dataimport.matches.LoadMatches;
@@ -47,7 +47,7 @@ public class Scheduler {
 		}
 	}
 	
-//	@Scheduled(cron = "${load.matches.schedule}")
+	@Scheduled(cron = "${load.matches.schedule}")
 	public void callLoadMatches() {
 		loadMatches.load();
 	}

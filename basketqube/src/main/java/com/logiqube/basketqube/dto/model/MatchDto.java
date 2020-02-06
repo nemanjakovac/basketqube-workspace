@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class MatchDto {
 
+	private long matchId;
 	private String leagueCode;
 	private String leagueName;
 	private String seasonCode;
@@ -21,5 +22,6 @@ public class MatchDto {
 	private TeamScore homeTeam;
 	private TeamScore awayTeam;
 	private BoxScore boxScore;
+	private String url;
 
 }

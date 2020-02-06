@@ -115,7 +115,7 @@ public class MatchLoaderEuroleague extends MatchLoader {
 //		String seasonCode = parameters.getFirst("seasoncode");
 		String seasonCode =	url.toString().substring(url.toString().indexOf("seasoncode") + 12,
 				url.toString().indexOf("seasoncode") + 16);
-		String round = ROUND_CURRENT;
+		String round = extractCurrentRound(doc.getElementsByClass("round-header").first().select("div > span:nth-child(3)").text());
 		//matchUrl.substring(matchUrl.indexOf("gamecode") + 9, matchUrl.indexOf("seasoncode") - 1);
 
 		LocalDateTime matchDate = extractMatchDate(gameDate);

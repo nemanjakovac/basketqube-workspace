@@ -11,4 +11,6 @@ public interface MatchService {
 
 	List<MatchDto> getAll();
 
+	MatchDto findById(String id);
+
 }

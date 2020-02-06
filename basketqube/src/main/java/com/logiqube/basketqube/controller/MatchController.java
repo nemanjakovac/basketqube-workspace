@@ -7,11 +7,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.logiqube.basketqube.dataimport.service.MatchService;
 import com.logiqube.basketqube.dto.model.MatchDto;
+import com.logiqube.basketqube.dto.model.PlayerDto;
 
 @CrossOrigin
 @RestController
@@ -24,6 +26,11 @@ public class MatchController {
 	@GetMapping(value = "")
 	public ResponseEntity<List<MatchDto>> findAll() {
 		return new ResponseEntity<>(matchService.getAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<MatchDto> findTeamById(@PathVariable("id") String id) {
+		return new ResponseEntity<>(matchService.findById(id), HttpStatus.OK);
 	}
 
 }

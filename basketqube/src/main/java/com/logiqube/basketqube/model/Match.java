@@ -3,6 +3,8 @@ package com.logiqube.basketqube.model;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,6 +20,12 @@ import lombok.Data;
 public class Match implements Serializable {
 
 	private static final long serialVersionUID = 3455908450482620919L;
+	
+	@Transient
+	public static final String SEQUENCE_NAME = "match_sequence";
+	
+	@Id
+	private long matchId;
 
 	@Field(value = "league_code")
 	private String leagueCode;
@@ -58,6 +66,9 @@ public class Match implements Serializable {
 		this.date = date;
 		this.round = round;
 		this.url = url;
+	}
+
+	public Match() {
 	}
 
 }
