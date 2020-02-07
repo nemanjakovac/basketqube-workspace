@@ -13,5 +13,6 @@ public interface PlayerService {
 	
 	List<PlayerDto> getAll();
 	PlayerDto findById(String id);
+	PlayerDto createPlayer(PlayerDto playerDto);
 
 }

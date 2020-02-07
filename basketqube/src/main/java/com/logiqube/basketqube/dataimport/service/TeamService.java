@@ -10,5 +10,7 @@ public interface TeamService {
 	TeamDto updateTeam(TeamDto teamDto);
 	List<TeamDto> getAll();
 	TeamDto findById(String id);
+	TeamDto createTeam(TeamDto teamDto);
+	void deleteTeam(String teamId);
 
 }

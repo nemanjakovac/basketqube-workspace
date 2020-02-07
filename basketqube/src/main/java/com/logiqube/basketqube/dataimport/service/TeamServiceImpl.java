@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.logiqube.basketqube.dataimport.repository.TeamRepository;
 import com.logiqube.basketqube.dto.mapper.TeamMapper;
 import com.logiqube.basketqube.dto.model.TeamDto;
+import com.logiqube.basketqube.model.Player;
 import com.logiqube.basketqube.model.Team;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,8 +39,8 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamDto updateTeam(TeamDto teamDto) {
-		// TODO Auto-generated method stub
-		return null;
+		Team updatedTeam = teamRepository.save(teamMapper.convertToEntity(teamDto));
+		return teamMapper.convertToDto(updatedTeam);
 	}
 
 	@Override
@@ -54,6 +55,19 @@ public class TeamServiceImpl implements TeamService {
 			return teamMapper.convertToDto(team.get());
 		//TODO handle object not present
 		return null;
+	}
+
+	@Override
+	public TeamDto createTeam(TeamDto teamDto) {
+		Team team = teamRepository.save(teamMapper.convertToEntity(teamDto));
+		return teamMapper.convertToDto(team);
+	}
+
+	@Override
+	public void deleteTeam(String teamId) {
+		Optional<Team> team = teamRepository.findByTeamId(Long.valueOf(teamId));
+		if(team.isPresent())
+			teamRepository.delete(team.get());
 	}
 
 }

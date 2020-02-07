@@ -9,14 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-        	.authorizeRequests().antMatchers("/", "/healthCheck").permitAll();
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/", "/healthCheck", "/player").permitAll();
 //        	.anyRequest().authenticated();
-    }
-    
-    
+		http.cors().and().csrf().disable();
+	}
+
 //	protected void configure(HttpSecurity http) throws Exception {
 //		http
 //			.authorizeRequests()
@@ -30,8 +29,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //			.logout()
 //				.permitAll();
 //	}
-    
-    
+
 //	@Bean
 //	@Override
 //	public UserDetailsService userDetailsService() {
@@ -44,5 +42,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 //
 //		return new InMemoryUserDetailsManager(user);
 //	}
+
+// https://stackoverflow.com/questions/50486314/how-to-solve-403-error-in-spring-boot-post-request
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        configuration.setAllowedMethods(Arrays.asList("*"));
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        configuration.setAllowCredentials(true);
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//    }
+
+//	If an HTTP 403 Forbidden is returned for HTTP POST, but works for HTTP GET
+//	then the issue is most likely related to CSRF.
+//	Either provide the CSRF	Token or disable CSRF protection (not recommended).
 
 }

@@ -74,6 +74,12 @@ public class PlayerServiceImpl implements PlayerService {
 		//TODO handle object not present
 		return null;
 	}
+
+	@Override
+	public PlayerDto createPlayer(PlayerDto playerDto) {
+		Player player = playerRepository.save(playerMapper.convertToEntity(playerDto));
+		return playerMapper.convertToDto(player);
+	}
 	
 	
 
