@@ -10,12 +10,12 @@
 	</parent>
 	<groupId>com.logiqube</groupId>
 	<artifactId>basketqube</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>basketqube</name>
 	<description>Basketball statistics project</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>14</java.version>
 	</properties>
 
 	<dependencies>
@@ -78,6 +78,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<!-- name for .jar file -->
+		<finalName>basketqube-app</finalName>
 	</build>
 
 </project>

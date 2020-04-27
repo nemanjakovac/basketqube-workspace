@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+
+  mongo-db:
+    image: mongo
+    restart: always
+    # volumes:
+    #   - database:/data/db
+    ports:
+    - "27017:27017"
+    networks: 
+      - basketqube-network
+   
+  basketqube-ws:
+    build: 
+      context: .
+      dockerfile: basketqube-ws
+    # image: kovac173/basketqube-ws
+    # image: basketqube-ws
+    ports:
+    - "9055:9055"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.data.mongodb.host": "mongo-db",
+        "spring.data.mongodb.port": 27017
+      }'
+    # links:
+    # - mongo-db
+    networks: 
+      - basketqube-network
+
+  basketqube-app:
+    image: kovac173/basketqube-app
+    ports:
+    - "3000:80"
+    # environment: 
+      # API_URL: 0.0.0.0:8080
+    networks: 
+      - basketqube-network
+
+networks: 
+  basketqube-network:
+    driver: bridge
+    
