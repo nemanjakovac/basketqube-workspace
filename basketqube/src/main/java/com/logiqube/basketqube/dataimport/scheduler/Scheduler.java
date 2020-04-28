@@ -29,7 +29,7 @@ public class Scheduler {
 	@Autowired
 	LoadMatches loadMatches;
 
-//	@Scheduled(cron = "${load.players.schedule}")
+	@Scheduled(cron = "${load.players.schedule}")
 	public void callLoadPlayers() {
 		try {
 			loadPlayers.load();
@@ -38,7 +38,7 @@ public class Scheduler {
 		}
 	}
 	
-//	@Scheduled(cron = "${load.teams.schedule}")
+	@Scheduled(cron = "${load.teams.schedule}")
 	public void callLoadTeams() {
 		try {
 			loadTeams.load();
