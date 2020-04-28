@@ -17,43 +17,43 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class PlayerServiceImpl implements PlayerService {
-	
+
 	@Autowired
 	private PlayerRepository playerRepository;
-	
+
 	@Autowired
 	private PlayerMapper playerMapper;
 
 	@Override
 	public PlayerDto savePlayer(PlayerDto playerDto) {
-		Optional<Player> player = playerRepository.findByFirstNameAndLastName(playerDto.getFirstName(), playerDto.getLastName());
-		if(!player.isPresent()) {
-			return playerMapper.convertToDto(playerRepository.save(playerMapper.convertToEntity(playerDto)));
+		Optional<Player> player = playerRepository.findByFirstNameAndLastName(playerDto.getFirstName(),
+				playerDto.getLastName());
+		if (player.isPresent()) {
+			log.error("Player duplicate");
+			throw new RuntimeException("Player duplicate");
 		}
-//		throw new Exception();
-		log.error("Player duplicate");
-		return null;
+		return playerMapper.convertToDto(playerRepository.save(playerMapper.convertToEntity(playerDto)));
+
 	}
 
 	@Override
 	public PlayerDto updatePlayer(PlayerDto playerDto) {
-		Optional<Player> player = (playerRepository.findByFirstNameAndLastName(playerDto.getFirstName(), playerDto.getLastName()));
-		if(player.isPresent()) {
-			Player playerModel = player.get();
-			playerModel.setNationality(playerDto.getNationality());
-			playerModel.setNote(playerDto.getNote());
-			return playerMapper.convertToDto(playerRepository.save(playerModel));
+		Optional<Player> player = (playerRepository.findByFirstNameAndLastName(playerDto.getFirstName(),
+				playerDto.getLastName()));
+		if (!player.isPresent()) {
+			throw new RuntimeException("Player doesn't exist");
 		}
-//		throw new Exception();
-		//TODO handle exception
-		log.error("Player with this height doesn't exist");
-		return null;
+		Player playerModel = player.get();
+		playerModel.setNationality(playerDto.getNationality());
+		playerModel.setNote(playerDto.getNote());
+		return playerMapper.convertToDto(playerRepository.save(playerModel));
+
 	}
 
 	@Override
 	public PlayerDto getByFirstNameAndLastName(String firstName, String lastName) {
 		Optional<Player> player = (playerRepository.findByFirstNameAndLastName(firstName, lastName));
-		if(player.isPresent()) {
+		if (player.isPresent()) {
 			Player playerModel = player.get();
 			return playerMapper.convertToDto(playerModel);
 		} else {
@@ -69,9 +69,9 @@ public class PlayerServiceImpl implements PlayerService {
 	@Override
 	public PlayerDto findById(String id) {
 		Optional<Player> player = playerRepository.findByPlayerId(Long.valueOf(id));
-		if(player.isPresent())
+		if (player.isPresent())
 			return playerMapper.convertToDto(player.get());
-		//TODO handle object not present
+		// TODO handle object not present
 		return null;
 	}
 
@@ -80,7 +80,5 @@ public class PlayerServiceImpl implements PlayerService {
 		Player player = playerRepository.save(playerMapper.convertToEntity(playerDto));
 		return playerMapper.convertToDto(player);
 	}
-	
-	
 
 }
